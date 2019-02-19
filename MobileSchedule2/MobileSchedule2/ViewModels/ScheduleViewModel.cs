@@ -2,6 +2,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -34,7 +35,7 @@ namespace MobileSchedule2.ViewModels
                 var id = !_isForTeacher ? App.GroupId : App.TeacherId;
                 Items.Clear();
                 var items = await DataStore.GetItemsAsync(api, id, _isForTeacher, true);
-                foreach (var item in items)
+                foreach (var item in items.OrderBy(x => x.WeekDay).ThenBy(x => x.Order))
                 {
                     Items.Add(item);
                 }
