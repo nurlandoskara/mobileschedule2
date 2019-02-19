@@ -1,5 +1,4 @@
 ﻿using MobileSchedule2.Models;
-using System;
 using System.Collections.Generic;
 
 using Xamarin.Forms;
@@ -10,15 +9,17 @@ namespace MobileSchedule2.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MenuPage : ContentPage
     {
-        MainPage RootPage { get => Application.Current.MainPage as MainPage; }
-        List<HomeMenuItem> menuItems;
+        private static MainPage RootPage => Application.Current.MainPage as MainPage;
+
         public MenuPage()
         {
             InitializeComponent();
 
-            menuItems = new List<HomeMenuItem>
+            var menuItems = new List<HomeMenuItem>
             {
                 new HomeMenuItem {Id = MenuItemType.Schedule, Title="Сабақ кестесі", Icon = "fas-calendar-alt" },
+                new HomeMenuItem {Id = MenuItemType.Groups, Title="Сыныптар", Icon = "fas-list-ol" },
+                new HomeMenuItem {Id = MenuItemType.News, Title="Жаңалықтар", Icon = "fas-newspaper" },
                 new HomeMenuItem {Id = MenuItemType.Settings, Title="Баптаулар", Icon = "fas-cog" }
             };
 

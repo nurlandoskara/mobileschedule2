@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,40 +15,37 @@ using MobileSchedule2.ViewModels;
 namespace MobileSchedule2.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ItemsPage : ContentPage
+    public partial class GroupsPage : ContentPage
     {
-        ItemsViewModel viewModel;
+        private readonly GroupsViewModel _viewModel;
+        private static MainPage RootPage => Application.Current.MainPage as MainPage;
 
-        public ItemsPage()
+        public GroupsPage()
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new ItemsViewModel();
+            BindingContext = _viewModel = new GroupsViewModel();
         }
 
-        async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
+        private async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var item = args.SelectedItem as Item;
+            var item = args.SelectedItem as Group;
             if (item == null)
                 return;
 
-            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
+            App.GroupId = item.Id;
+            await RootPage.NavigateFromMenu((int) MenuItemType.Schedule);
 
             // Manually deselect item.
             ItemsListView.SelectedItem = null;
-        }
-
-        async void AddItem_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            if (viewModel.Items.Count == 0)
-                viewModel.LoadItemsCommand.Execute(null);
+            if (_viewModel.Items.Count == 0)
+                _viewModel.LoadItemsCommand.Execute(null);
         }
     }
 }

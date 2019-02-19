@@ -1,32 +1,22 @@
-﻿using System;
+﻿using MobileSchedule2.Models;
+using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
-
-using MobileSchedule2.Models;
-using MobileSchedule2.Views;
 
 namespace MobileSchedule2.ViewModels
 {
-    public class ItemsViewModel : BaseViewModel
+    public class ScheduleViewModel : BaseViewModel<Lesson>
     {
-        public ObservableCollection<Item> Items { get; set; }
+        public ObservableCollection<Lesson> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-        public ItemsViewModel()
+        public ScheduleViewModel()
         {
-            Title = "Browse";
-            Items = new ObservableCollection<Item>();
+            Title = "Сабақ кестесі";
+            Items = new ObservableCollection<Lesson>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-
-            MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
-            {
-                var newItem = item as Item;
-                Items.Add(newItem);
-                await DataStore.AddItemAsync(newItem);
-            });
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -39,7 +29,7 @@ namespace MobileSchedule2.ViewModels
             try
             {
                 Items.Clear();
-                var items = await DataStore.GetItemsAsync(true);
+                var items = await DataStore.GetItemsAsync(true, App.GroupId);
                 foreach (var item in items)
                 {
                     Items.Add(item);

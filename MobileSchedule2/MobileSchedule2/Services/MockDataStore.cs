@@ -1,66 +1,65 @@
-﻿using System;
+﻿using MobileSchedule2.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MobileSchedule2.Models;
 
 namespace MobileSchedule2.Services
 {
-    public class MockDataStore : IDataStore<Item>
+    public class MockDataStore<T> : IDataStore<T> where T:BaseDbObject, new()
     {
-        List<Item> items;
+        private readonly List<T> _items;
 
         public MockDataStore()
         {
-            items = new List<Item>();
-            var mockItems = new List<Item>
+            _items = new List<T>();
+            var mockItems = new List<T>
             {
-                new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Third item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is an item description." },
+                new T { Id = 0, Title = "First item"},
+                new T { Id = 1, Title = "Second item"},
+                new T { Id = 2, Title = "Third item"},
+                new T { Id = 3, Title = "Fourth item"},
+                new T { Id = 4, Title = "Fifth item"},
+                new T { Id = 5, Title = "Sixth item"},
             };
 
             foreach (var item in mockItems)
             {
-                items.Add(item);
+                _items.Add(item);
             }
         }
 
-        public async Task<bool> AddItemAsync(Item item)
+        public async Task<bool> AddItemAsync(T item)
         {
-            items.Add(item);
+            _items.Add(item);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> UpdateItemAsync(Item item)
+        public async Task<bool> UpdateItemAsync(T item)
         {
-            var oldItem = items.Where((Item arg) => arg.Id == item.Id).FirstOrDefault();
-            items.Remove(oldItem);
-            items.Add(item);
+            var oldItem = _items.FirstOrDefault(arg => arg.Id == item.Id);
+            _items.Remove(oldItem);
+            _items.Add(item);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteItemAsync(string id)
+        public async Task<bool> DeleteItemAsync(int id)
         {
-            var oldItem = items.Where((Item arg) => arg.Id == id).FirstOrDefault();
-            items.Remove(oldItem);
+            var oldItem = _items.FirstOrDefault(arg => arg.Id == id);
+            _items.Remove(oldItem);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<Item> GetItemAsync(string id)
+        public async Task<T> GetItemAsync(int id)
         {
-            return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
+            return await Task.FromResult(_items.FirstOrDefault(s => s.Id == id));
         }
 
-        public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<T>> GetItemsAsync(bool forceRefresh = false, int groupId = 0)
         {
-            return await Task.FromResult(items);
+            return await Task.FromResult(_items);
         }
     }
 }

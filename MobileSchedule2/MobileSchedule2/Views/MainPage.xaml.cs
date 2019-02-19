@@ -1,5 +1,4 @@
 ﻿using MobileSchedule2.Models;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -10,32 +9,44 @@ namespace MobileSchedule2.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : MasterDetailPage
     {
-        Dictionary<int, NavigationPage> MenuPages = new Dictionary<int, NavigationPage>();
+        private readonly Dictionary<int, NavigationPage> _menuPages = new Dictionary<int, NavigationPage>();
         public MainPage()
         {
             InitializeComponent();
 
             MasterBehavior = MasterBehavior.Popover;
 
-            MenuPages.Add((int)MenuItemType.Schedule, (NavigationPage)Detail);
+            _menuPages.Add((int)MenuItemType.Schedule, (NavigationPage)Detail);
+            if (App.GroupId == 0) FirstRun();
+        }
+
+        private async void FirstRun()
+        {
+            await NavigateFromMenu((int)MenuItemType.Groups);
         }
 
         public async Task NavigateFromMenu(int id)
         {
-            if (!MenuPages.ContainsKey(id))
+            if (!_menuPages.ContainsKey(id))
             {
                 switch (id)
                 {
                     case (int)MenuItemType.Schedule:
-                        MenuPages.Add(id, new NavigationPage(new ItemsPage()));
+                        if (App.GroupId == 0) await NavigateFromMenu((int) MenuItemType.Groups);
+                        else _menuPages.Add(id, new NavigationPage(new SchedulePage()));
+                        break;
+                    case (int)MenuItemType.Groups:
+                        _menuPages.Add(id, new NavigationPage(new GroupsPage()));
+                        break;
+                    case (int)MenuItemType.News:
                         break;
                     case (int)MenuItemType.Settings:
-                        MenuPages.Add(id, new NavigationPage(new AboutPage()));
+                        _menuPages.Add(id, new NavigationPage(new SettingsPage()));
                         break;
                 }
             }
 
-            var newPage = MenuPages[id];
+            var newPage = _menuPages[id];
 
             if (newPage != null && Detail != newPage)
             {

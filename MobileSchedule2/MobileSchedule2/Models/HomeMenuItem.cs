@@ -7,6 +7,8 @@ namespace MobileSchedule2.Models
     public enum MenuItemType
     {
         Schedule,
+        Groups,
+        News,
         Settings
     }
     public class HomeMenuItem

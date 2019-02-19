@@ -10,9 +10,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
     <PackageReference Include="Xam.Plugin.Iconize" Version="3.5.0.112" />
     <PackageReference Include="Xam.Plugin.Iconize.FontAwesome" Version="3.5.0.112" />
     <PackageReference Include="Xam.Plugin.Iconize.Ionicons" Version="3.5.0.112" />
     <PackageReference Include="Xamarin.Forms" Version="3.5.0.129452" />  
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\GroupsPage.xaml.cs">
+      <DependentUpon>GroupsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SchedulePage.xaml.cs">
+      <DependentUpon>SchedulePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>
