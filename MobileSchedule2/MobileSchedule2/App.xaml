@@ -10,6 +10,15 @@
                 <Setter Property="BarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
                 <Setter Property="BarTextColor" Value="White" />
             </Style>
+            <Color x:Key="DarkColor">#2c3e50</Color>
+            <Color x:Key="LightColor">#ecf0f1</Color>
+            <Color x:Key="AccentColor">#8e44ad</Color>
+            <Color x:Key="BackColor">#bdc3c7</Color>
+            <Color x:Key="OrangeColor">#d35400</Color>
+            <Color x:Key="RedColor">#c0392b</Color>
+            <Color x:Key="BlueColor">#2980b9</Color>
+            <Color x:Key="GreenColor">#16a085</Color>
+            <Color x:Key="GreenColor2">#27ae60</Color>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

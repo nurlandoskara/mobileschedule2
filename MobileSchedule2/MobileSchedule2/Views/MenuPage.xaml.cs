@@ -18,8 +18,8 @@ namespace MobileSchedule2.Views
 
             menuItems = new List<HomeMenuItem>
             {
-                new HomeMenuItem {Id = MenuItemType.Browse, Title="Browse" },
-                new HomeMenuItem {Id = MenuItemType.About, Title="About" }
+                new HomeMenuItem {Id = MenuItemType.Schedule, Title="Сабақ кестесі", Icon = "fas-calendar-alt" },
+                new HomeMenuItem {Id = MenuItemType.Settings, Title="Баптаулар", Icon = "fas-cog" }
             };
 
             ListViewMenu.ItemsSource = menuItems;

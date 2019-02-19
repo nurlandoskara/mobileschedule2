@@ -12,6 +12,9 @@ namespace MobileSchedule2
         public App()
         {
             InitializeComponent();
+            Plugin.Iconize.Iconize
+                .With(new Plugin.Iconize.Fonts.IoniconsModule())
+                .With(new Plugin.Iconize.Fonts.FontAwesomeSolidModule());
 
 
             MainPage = new MainPage();

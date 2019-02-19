@@ -17,7 +17,7 @@ namespace MobileSchedule2.Views
 
             MasterBehavior = MasterBehavior.Popover;
 
-            MenuPages.Add((int)MenuItemType.Browse, (NavigationPage)Detail);
+            MenuPages.Add((int)MenuItemType.Schedule, (NavigationPage)Detail);
         }
 
         public async Task NavigateFromMenu(int id)
@@ -26,10 +26,10 @@ namespace MobileSchedule2.Views
             {
                 switch (id)
                 {
-                    case (int)MenuItemType.Browse:
+                    case (int)MenuItemType.Schedule:
                         MenuPages.Add(id, new NavigationPage(new ItemsPage()));
                         break;
-                    case (int)MenuItemType.About:
+                    case (int)MenuItemType.Settings:
                         MenuPages.Add(id, new NavigationPage(new AboutPage()));
                         break;
                 }
