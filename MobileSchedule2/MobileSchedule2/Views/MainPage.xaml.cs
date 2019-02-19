@@ -35,8 +35,15 @@ namespace MobileSchedule2.Views
                         if (App.GroupId == 0) await NavigateFromMenu((int) MenuItemType.Groups);
                         else _menuPages.Add(id, new NavigationPage(new SchedulePage()));
                         break;
+                    case (int)MenuItemType.ScheduleForTeacher:
+                        if (App.TeacherId == 0) await NavigateFromMenu((int)MenuItemType.Teachers);
+                        else _menuPages.Add(id, new NavigationPage(new SchedulePage(true)));
+                        break;
                     case (int)MenuItemType.Groups:
                         _menuPages.Add(id, new NavigationPage(new GroupsPage()));
+                        break;
+                    case (int)MenuItemType.Teachers:
+                        _menuPages.Add(id, new NavigationPage(new TeachersPage()));
                         break;
                     case (int)MenuItemType.News:
                         break;

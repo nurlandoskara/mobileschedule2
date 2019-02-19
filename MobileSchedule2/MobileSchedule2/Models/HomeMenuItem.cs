@@ -7,7 +7,9 @@ namespace MobileSchedule2.Models
     public enum MenuItemType
     {
         Schedule,
+        ScheduleForTeacher,
         Groups,
+        Teachers,
         News,
         Settings
     }

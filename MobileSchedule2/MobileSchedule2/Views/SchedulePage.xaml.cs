@@ -10,10 +10,10 @@ namespace MobileSchedule2.Views
     {
         private readonly ScheduleViewModel _viewModel;
 
-        public SchedulePage()
+        public SchedulePage(bool isForTeacher= false)
         {
             InitializeComponent();
-            BindingContext = _viewModel = new ScheduleViewModel();
+            BindingContext = _viewModel = new ScheduleViewModel(isForTeacher);
         }
 
         protected override void OnAppearing()

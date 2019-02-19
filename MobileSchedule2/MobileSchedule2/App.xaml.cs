@@ -5,12 +5,18 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using MobileSchedule2.Views;
 using SQLite;
+using Xamarin.Essentials;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MobileSchedule2
 {
     public partial class App : Application
     {
+        public static int GroupId { get; set; }
+        public static int TeacherId { get; set; }
+        public static string BackendUrl = "http://schoolschedule.azurewebsites.net/";
+
+        public static bool IsOnline => Connectivity.NetworkAccess == NetworkAccess.Internet;
 
         public App()
         {
@@ -38,6 +44,7 @@ namespace MobileSchedule2
                     {
                         _dbConnection.CreateTableAsync<Group>().Wait();
                         _dbConnection.CreateTableAsync<Lesson>().Wait();
+                        _dbConnection.CreateTableAsync<Teacher>().Wait();
                     }
                     catch (Exception e)
                     {
@@ -48,9 +55,7 @@ namespace MobileSchedule2
                 return _dbConnection;
             }
         }
-
-        public static int GroupId { get; set; }
-
+        
         protected override void OnStart()
         {
             // Handle when your app starts

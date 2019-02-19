@@ -10,7 +10,7 @@ namespace MobileSchedule2.ViewModels
 {
     public class BaseViewModel<T1> : INotifyPropertyChanged where T1:BaseDbObject, new ()
     {
-        public IDataStore<T1> DataStore => DependencyService.Get<IDataStore<T1>>() ?? new MockDataStore<T1>();
+        public IDataStore<T1> DataStore => DependencyService.Get<IDataStore<T1>>() ?? new DataStore<T1>();
 
         private bool _isBusy = false;
         public bool IsBusy

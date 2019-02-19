@@ -6,6 +6,10 @@ namespace MobileSchedule2.Models
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        public string Title { get; set; }
+        public int ServerId { get; set; }
+        public bool IsDeleted { get; set; }
+
+        public bool IsForTeacher { get; set; }
+        public int GroupOrTeacherId { get; set; }
     }
 }

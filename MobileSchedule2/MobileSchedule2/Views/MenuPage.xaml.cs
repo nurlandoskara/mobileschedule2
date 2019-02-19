@@ -18,7 +18,9 @@ namespace MobileSchedule2.Views
             var menuItems = new List<HomeMenuItem>
             {
                 new HomeMenuItem {Id = MenuItemType.Schedule, Title="Сабақ кестесі", Icon = "fas-calendar-alt" },
+                new HomeMenuItem {Id = MenuItemType.ScheduleForTeacher, Title="Мұғалімдер кестесі", Icon = "fas-clipboard-list" },
                 new HomeMenuItem {Id = MenuItemType.Groups, Title="Сыныптар", Icon = "fas-list-ol" },
+                new HomeMenuItem {Id = MenuItemType.Teachers, Title="Мұғалімдер", Icon = "fas-chalkboard-teacher" },
                 new HomeMenuItem {Id = MenuItemType.News, Title="Жаңалықтар", Icon = "fas-newspaper" },
                 new HomeMenuItem {Id = MenuItemType.Settings, Title="Баптаулар", Icon = "fas-cog" }
             };

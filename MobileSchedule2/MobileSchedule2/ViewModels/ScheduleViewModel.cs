@@ -9,17 +9,19 @@ namespace MobileSchedule2.ViewModels
 {
     public class ScheduleViewModel : BaseViewModel<Lesson>
     {
+        private readonly bool _isForTeacher;
         public ObservableCollection<Lesson> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-        public ScheduleViewModel()
+        public ScheduleViewModel(bool isForTeacher = false)
         {
-            Title = "Сабақ кестесі";
+            _isForTeacher = isForTeacher;
+            Title = isForTeacher ? "Сабақ кестесі" : "Мұғалім кестесі";
             Items = new ObservableCollection<Lesson>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
         }
 
-        async Task ExecuteLoadItemsCommand()
+        private async Task ExecuteLoadItemsCommand()
         {
             if (IsBusy)
                 return;
@@ -28,8 +30,10 @@ namespace MobileSchedule2.ViewModels
 
             try
             {
+                var api = !_isForTeacher ? $"api/Schedule?groupId={App.GroupId}" : $"api/TSchedule?teacherId={App.TeacherId}";
+                var id = !_isForTeacher ? App.GroupId : App.TeacherId;
                 Items.Clear();
-                var items = await DataStore.GetItemsAsync(true, App.GroupId);
+                var items = await DataStore.GetItemsAsync(api, id, _isForTeacher, true);
                 foreach (var item in items)
                 {
                     Items.Add(item);
