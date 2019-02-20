@@ -1,4 +1,5 @@
-﻿using MobileSchedule2.Models;
+﻿using MobileSchedule2.Enums;
+using MobileSchedule2.Models;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -11,15 +12,32 @@ namespace MobileSchedule2.ViewModels
     public class ScheduleViewModel : BaseViewModel<Lesson>
     {
         private readonly bool _isForTeacher;
-        public ObservableCollection<Lesson> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
+        public ObservableCollection<GroupItem> GroupItems { get; set; }
 
         public ScheduleViewModel(bool isForTeacher = false)
         {
             _isForTeacher = isForTeacher;
-            Title = isForTeacher ? "Сабақ кестесі" : "Мұғалім кестесі";
-            Items = new ObservableCollection<Lesson>();
+            Title = !isForTeacher ? "Сабақ кестесі" : "Мұғалім кестесі";
+            GroupItems = new ObservableCollection<GroupItem>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            LoadInfo(isForTeacher);
+        }
+
+        private async void LoadInfo(bool isForTeacher)
+        {
+            if (isForTeacher)
+            {
+                var teacherName = await App.DbConnection.Table<Teacher>()
+                    .FirstOrDefaultAsync(x => x.ServerId == App.TeacherId);
+                if (teacherName != null) Info = teacherName.DisplayName;
+            }
+            else
+            {
+                var groupName = await App.DbConnection.Table<Group>()
+                    .FirstOrDefaultAsync(x => x.ServerId == App.GroupId);
+                if (groupName != null) Info = groupName.DisplayName;
+            }
         }
 
         private async Task ExecuteLoadItemsCommand()
@@ -33,16 +51,23 @@ namespace MobileSchedule2.ViewModels
             {
                 var api = !_isForTeacher ? $"api/Schedule?groupId={App.GroupId}" : $"api/TSchedule?teacherId={App.TeacherId}";
                 var id = !_isForTeacher ? App.GroupId : App.TeacherId;
-                Items.Clear();
-                var items = await DataStore.GetItemsAsync(api, id, _isForTeacher, true);
-                foreach (var item in items.OrderBy(x => x.WeekDay).ThenBy(x => x.Order))
+
+                GroupItems.Clear();
+                var items = await DataStore.GetLessonsAsync(api, id, _isForTeacher, true);
+                foreach (var item in items.GroupBy(x => x.WeekDay))
                 {
-                    Items.Add(item);
+                    var groupItem = new GroupItem
+                    {
+                        Title = EnumHelper.Description(item.Key),
+                        Items = new ObservableCollection<Lesson>(item.OrderBy(x => x.Order).ToList())
+                    };
+                    GroupItems.Add(groupItem);
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+                Info = "Серверге қосылу мүмкін емес...";
             }
             finally
             {

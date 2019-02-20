@@ -32,8 +32,11 @@ namespace MobileSchedule2.Views
             var item = args.SelectedItem as Group;
             if (item == null)
                 return;
-
+            var editor = App.Preferences.Edit();
+            editor.PutInt("GroupId", item.Id);
+            editor.Apply();
             App.GroupId = item.Id;
+            App.IsGroupChanged = true;
             await RootPage.NavigateFromMenu((int) MenuItemType.Schedule);
 
             // Manually deselect item.

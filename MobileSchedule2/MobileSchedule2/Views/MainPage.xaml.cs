@@ -17,6 +17,8 @@ namespace MobileSchedule2.Views
             MasterBehavior = MasterBehavior.Popover;
 
             _menuPages.Add((int)MenuItemType.Schedule, (NavigationPage)Detail);
+            App.GroupId = App.Preferences.GetInt("GroupId", 0);
+            App.TeacherId = App.Preferences.GetInt("TeacherId", 0);
             if (App.GroupId == 0) FirstRun();
         }
 
@@ -46,6 +48,7 @@ namespace MobileSchedule2.Views
                         _menuPages.Add(id, new NavigationPage(new TeachersPage()));
                         break;
                     case (int)MenuItemType.News:
+                        _menuPages.Add(id, new NavigationPage(new SettingsPage()));
                         break;
                     case (int)MenuItemType.Settings:
                         _menuPages.Add(id, new NavigationPage(new SettingsPage()));

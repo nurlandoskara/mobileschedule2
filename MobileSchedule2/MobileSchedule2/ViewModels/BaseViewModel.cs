@@ -12,6 +12,13 @@ namespace MobileSchedule2.ViewModels
     {
         public IDataStore<T1> DataStore => DependencyService.Get<IDataStore<T1>>() ?? new DataStore<T1>();
 
+        private string _info;
+        public string Info
+        {
+            get => _info;
+            set => SetProperty(ref _info, value);
+        }
+
         private bool _isBusy = false;
         public bool IsBusy
         {

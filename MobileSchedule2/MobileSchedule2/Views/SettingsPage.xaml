@@ -3,10 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileSchedule2.Views.SettingsPage"
              xmlns:vm="clr-namespace:MobileSchedule2.ViewModels"
-             Title="Баптаулар">
+             Title="Қосымша" Icon="fas-info-cirle">
     
     <ContentPage.BindingContext>
         <vm:SettingsViewModel />
     </ContentPage.BindingContext>
     
+    <StackLayout>
+        <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" VerticalTextAlignment="Center" Text="Сабақ кестесі" TextColor="{StaticResource OrangeColor}" FontSize="Large" FontAttributes="Bold"/>
+        <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" VerticalTextAlignment="Center" Text="2019" TextColor="{StaticResource DarkColor}" FontSize="Small"/>
+
+        <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" VerticalTextAlignment="Center" Text="Авторлары:" TextColor="{StaticResource DarkColor}" FontSize="Medium" FontAttributes="Bold"/>
+        <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" VerticalTextAlignment="Center" Text="Имя фамилия" TextColor="{StaticResource DarkColor}" FontSize="Medium"/>
+
+    </StackLayout>
 </ContentPage>

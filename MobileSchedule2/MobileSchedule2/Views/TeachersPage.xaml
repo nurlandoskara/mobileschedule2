@@ -1,10 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:iconize="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize"
              x:Class="MobileSchedule2.Views.TeachersPage"
               Title="{Binding Title}">
 
     <StackLayout>
+        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" Text="{Binding Info}" TextColor="{StaticResource DarkColor}" FontSize="Medium"/>
         <Label Text="Мұғалімді таңдаңыз!" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
         <SearchBar x:Name="SearchGroupText" Text="{Binding SearchText}"/>
         <ListView x:Name="ItemsListView"
@@ -19,7 +21,14 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Padding="10">
+                        <StackLayout Padding="10" Orientation="Horizontal">
+                            <iconize:IconImage
+                                BackgroundColor="Transparent"
+                                HeightRequest="20"
+                                Icon="fas-chalkboard-teacher"
+                                IconColor="{StaticResource OrangeColor}"
+                                IconSize="20"
+                                WidthRequest="20" />
                             <Label Text="{Binding DisplayName}" 
                                 LineBreakMode="NoWrap" 
                                 Style="{DynamicResource ListItemTextStyle}" 

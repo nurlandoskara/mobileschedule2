@@ -1,6 +1,5 @@
 ﻿using MobileSchedule2.Models;
 using MobileSchedule2.ViewModels;
-using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -25,7 +24,11 @@ namespace MobileSchedule2.Views
             if (item == null)
                 return;
 
+            var editor = App.Preferences.Edit();
+            editor.PutInt("TeacherId", item.Id);
+            editor.Apply();
             App.TeacherId = item.Id;
+            App.IsTeacherChanged = true;
             await RootPage.NavigateFromMenu((int) MenuItemType.ScheduleForTeacher);
 
             // Manually deselect item.

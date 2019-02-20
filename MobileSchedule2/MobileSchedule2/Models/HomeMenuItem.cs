@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MobileSchedule2.Models
+﻿namespace MobileSchedule2.Models
 {
     public enum MenuItemType
     {

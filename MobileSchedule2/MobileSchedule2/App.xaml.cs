@@ -1,11 +1,13 @@
-﻿using System;
-using System.IO;
+﻿using Android.Content;
+using Android.Preferences;
 using MobileSchedule2.Models;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 using MobileSchedule2.Views;
 using SQLite;
+using System;
+using System.IO;
 using Xamarin.Essentials;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MobileSchedule2
@@ -15,8 +17,11 @@ namespace MobileSchedule2
         public static int GroupId { get; set; }
         public static int TeacherId { get; set; }
         public static string BackendUrl = "http://schoolschedule.azurewebsites.net/";
+        public static bool IsGroupChanged;
+        public static bool IsTeacherChanged;
 
         public static bool IsOnline => Connectivity.NetworkAccess == NetworkAccess.Internet;
+        public static ISharedPreferences Preferences => PreferenceManager.GetDefaultSharedPreferences(Android.App.Application.Context);
 
         public App()
         {
@@ -24,7 +29,6 @@ namespace MobileSchedule2
             Plugin.Iconize.Iconize
                 .With(new Plugin.Iconize.Fonts.IoniconsModule())
                 .With(new Plugin.Iconize.Fonts.FontAwesomeSolidModule());
-
 
             MainPage = new MainPage();
         }

@@ -41,7 +41,7 @@ namespace MobileSchedule2.Services
             return _items;
         }
 
-        public async Task<IEnumerable<T>> GetItemsAsync(string api, int id, bool isForTeacher = false, bool forceRefresh = false)
+        public async Task<IEnumerable<T>> GetLessonsAsync(string api, int id, bool isForTeacher = false, bool forceRefresh = false)
         {
             if (!forceRefresh) return _items;
             List<T> itemsAsync;
@@ -52,10 +52,9 @@ namespace MobileSchedule2.Services
                 itemsAsync = items.ToList();
                 foreach (var item in itemsAsync)
                 {
-                    item.ServerId = item.Id;
                     item.GroupOrTeacherId = id;
                     item.IsForTeacher = isForTeacher;
-                    SaveLocal(item);
+                    SaveLocal(item as Lesson);
                 }
             }
             else
@@ -80,6 +79,19 @@ namespace MobileSchedule2.Services
         private static async void SaveLocal(T item)
         {
             var dbItem = await App.DbConnection.Table<T>().FirstOrDefaultAsync(x => x.ServerId == item.Id);
+            if (dbItem != null)
+            {
+                await App.DbConnection.UpdateAsync(item);
+            }
+            else
+            {
+                await App.DbConnection.InsertAsync(item);
+            }
+        }
+
+        private static async void SaveLocal(Lesson item)
+        {
+            var dbItem = await App.DbConnection.Table<Lesson>().FirstOrDefaultAsync(x => x.Order == item.Order && x.WeekDay == item.WeekDay && x.GroupOrTeacherId == item.GroupOrTeacherId && x.IsForTeacher == item.IsForTeacher);
             if (dbItem != null)
             {
                 await App.DbConnection.UpdateAsync(item);

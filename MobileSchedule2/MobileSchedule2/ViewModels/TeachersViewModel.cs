@@ -67,6 +67,7 @@ namespace MobileSchedule2.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+                Info = "Серверге қосылу мүмкін емес...";
             }
             finally
             {
