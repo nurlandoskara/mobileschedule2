@@ -1,10 +1,10 @@
-﻿using MobileSchedule2.Enums;
-using MobileSchedule2.Models;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using MobileSchedule2.Enums;
+using MobileSchedule2.Models;
 using Xamarin.Forms;
 
 namespace MobileSchedule2.ViewModels
@@ -21,12 +21,11 @@ namespace MobileSchedule2.ViewModels
             Title = !isForTeacher ? "Сабақ кестесі" : "Мұғалім кестесі";
             GroupItems = new ObservableCollection<GroupItem>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-            LoadInfo(isForTeacher);
         }
 
-        private async void LoadInfo(bool isForTeacher)
+        private async void LoadInfo()
         {
-            if (isForTeacher)
+            if (_isForTeacher)
             {
                 var teacherName = await App.DbConnection.Table<Teacher>()
                     .FirstOrDefaultAsync(x => x.ServerId == App.TeacherId);
@@ -49,6 +48,7 @@ namespace MobileSchedule2.ViewModels
 
             try
             {
+                LoadInfo();
                 var api = !_isForTeacher ? $"api/Schedule?groupId={App.GroupId}" : $"api/TSchedule?teacherId={App.TeacherId}";
                 var id = !_isForTeacher ? App.GroupId : App.TeacherId;
 
