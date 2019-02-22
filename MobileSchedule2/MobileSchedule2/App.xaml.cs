@@ -49,6 +49,7 @@ namespace MobileSchedule2
                         _dbConnection.CreateTableAsync<Group>().Wait();
                         _dbConnection.CreateTableAsync<Lesson>().Wait();
                         _dbConnection.CreateTableAsync<Teacher>().Wait();
+                        _dbConnection.CreateTableAsync<News>().Wait();
                     }
                     catch (Exception e)
                     {

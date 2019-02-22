@@ -51,8 +51,9 @@
                                                 <StackLayout Orientation="Horizontal" BackgroundColor="{StaticResource LightColor}" Padding="10,5">
                                                     <Label Text="{Binding Order}" TextColor="{StaticResource OrangeColor}" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
                                                     <Label Text="{Binding SubjectName}" LineBreakMode="WordWrap" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
-                                                    <Label Text="{Binding GroupOrTeacherName}" LineBreakMode="WordWrap" HorizontalOptions="EndAndExpand"/>
-                                                </StackLayout>
+                                                    <Label Text="{Binding GroupOrTeacherName}" LineBreakMode="WordWrap" HorizontalOptions="CenterAndExpand"/>
+                                                    <Label Text="{Binding AuditoryName}" LineBreakMode="WordWrap" HorizontalOptions="EndAndExpand"/>
+                                                    </StackLayout>
                                             </ViewCell>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>

@@ -48,7 +48,7 @@ namespace MobileSchedule2.Views
                         _menuPages.Add(id, new NavigationPage(new TeachersPage()));
                         break;
                     case (int)MenuItemType.News:
-                        _menuPages.Add(id, new NavigationPage(new SettingsPage()));
+                        _menuPages.Add(id, new NavigationPage(new NewsPage()));
                         break;
                     case (int)MenuItemType.Settings:
                         _menuPages.Add(id, new NavigationPage(new SettingsPage()));
