@@ -29,7 +29,7 @@ namespace MobileSchedule2.Views
             editor.Apply();
             App.TeacherId = item.Id;
             App.IsTeacherChanged = true;
-            await RootPage.NavigateFromMenu((int) MenuItemType.ScheduleForTeacher);
+            await Navigation.PushAsync(new SchedulePage(true));
 
             // Manually deselect item.
             ItemsListView.SelectedItem = null;

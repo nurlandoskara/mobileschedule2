@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
+using MobileSchedule2.Models;
+using MobileSchedule2.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
-using MobileSchedule2.Models;
-using MobileSchedule2.Views;
-using MobileSchedule2.ViewModels;
 
 namespace MobileSchedule2.Views
 {
@@ -37,7 +29,7 @@ namespace MobileSchedule2.Views
             editor.Apply();
             App.GroupId = item.Id;
             App.IsGroupChanged = true;
-            await RootPage.NavigateFromMenu((int) MenuItemType.Schedule);
+            await Navigation.PushAsync(new SchedulePage());
 
             // Manually deselect item.
             ItemsListView.SelectedItem = null;

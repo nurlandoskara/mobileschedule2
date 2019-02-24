@@ -11,9 +11,11 @@ namespace MobileSchedule2.Views
     public partial class SchedulePage : ContentPage
     {
         private readonly ScheduleViewModel _viewModel;
+        private readonly bool _isForTeacher;
 
         public SchedulePage(bool isForTeacher= false)
         {
+            _isForTeacher = isForTeacher;
             InitializeComponent();
             BindingContext = _viewModel = new ScheduleViewModel(isForTeacher);
         }
@@ -27,6 +29,15 @@ namespace MobileSchedule2.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+
+            if (_isForTeacher)
+            {
+                if (App.TeacherId == 0) Navigation.PushAsync(new TeachersPage());
+            }
+            else
+            {
+                if (App.GroupId == 0) Navigation.PushAsync(new GroupsPage());
+            }
 
             if (_viewModel.GroupItems.Count == 0 || App.IsGroupChanged || App.IsTeacherChanged)
             {
