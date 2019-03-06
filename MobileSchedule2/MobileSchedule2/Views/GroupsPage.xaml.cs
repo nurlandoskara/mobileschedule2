@@ -25,9 +25,9 @@ namespace MobileSchedule2.Views
             if (item == null)
                 return;
             var editor = App.Preferences.Edit();
-            editor.PutInt("GroupId", item.Id);
+            editor.PutInt("GroupId", item.ServerId);
             editor.Apply();
-            App.GroupId = item.Id;
+            App.GroupId = item.ServerId;
             App.IsGroupChanged = true;
             await Navigation.PushAsync(new SchedulePage());
 

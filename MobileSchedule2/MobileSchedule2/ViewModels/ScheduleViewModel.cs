@@ -54,10 +54,11 @@ namespace MobileSchedule2.ViewModels
 
                 GroupItems.Clear();
                 var items = await DataStore.GetLessonsAsync(api, id, _isForTeacher, true);
-                foreach (var item in items.GroupBy(x => x.WeekDay))
+                foreach (var item in items.GroupBy(x => x.WeekDay).OrderBy(x => x.Key))
                 {
                     var groupItem = new GroupItem
                     {
+                        IsCurrent = (int)item.Key == (int)DateTime.Now.DayOfWeek,
                         Title = EnumHelper.Description(item.Key),
                         Items = new ObservableCollection<Lesson>(item.OrderBy(x => x.Order).ToList())
                     };

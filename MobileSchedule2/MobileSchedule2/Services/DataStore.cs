@@ -81,6 +81,7 @@ namespace MobileSchedule2.Services
             var dbItem = await App.DbConnection.Table<T>().FirstOrDefaultAsync(x => x.ServerId == item.Id);
             if (dbItem != null)
             {
+                item.Id = dbItem.Id;
                 await App.DbConnection.UpdateAsync(item);
             }
             else
@@ -94,6 +95,7 @@ namespace MobileSchedule2.Services
             var dbItem = await App.DbConnection.Table<Lesson>().FirstOrDefaultAsync(x => x.Order == item.Order && x.WeekDay == item.WeekDay && x.GroupOrTeacherId == item.GroupOrTeacherId && x.IsForTeacher == item.IsForTeacher);
             if (dbItem != null)
             {
+                item.Id = dbItem.Id;
                 await App.DbConnection.UpdateAsync(item);
             }
             else

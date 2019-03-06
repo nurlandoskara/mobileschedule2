@@ -13,7 +13,7 @@ namespace MobileSchedule2.Views
         private readonly ScheduleViewModel _viewModel;
         private readonly bool _isForTeacher;
 
-        public SchedulePage(bool isForTeacher= false)
+        public SchedulePage(bool isForTeacher = false)
         {
             _isForTeacher = isForTeacher;
             InitializeComponent();
@@ -39,7 +39,7 @@ namespace MobileSchedule2.Views
                 if (App.GroupId == 0) Navigation.PushAsync(new GroupsPage());
             }
 
-            if (_viewModel.GroupItems.Count == 0 || App.IsGroupChanged || App.IsTeacherChanged)
+            if (App.IsGroupChanged || App.IsTeacherChanged || _viewModel.GroupItems.Count == 0)
             {
                 App.IsGroupChanged = false;
                 App.IsTeacherChanged = false;

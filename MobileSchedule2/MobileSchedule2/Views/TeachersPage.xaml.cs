@@ -25,9 +25,9 @@ namespace MobileSchedule2.Views
                 return;
 
             var editor = App.Preferences.Edit();
-            editor.PutInt("TeacherId", item.Id);
+            editor.PutInt("TeacherId", item.ServerId);
             editor.Apply();
-            App.TeacherId = item.Id;
+            App.TeacherId = item.ServerId;
             App.IsTeacherChanged = true;
             await Navigation.PushAsync(new SchedulePage(true));
 

@@ -19,7 +19,7 @@
                 <DataTemplate>
                     <ViewCell>
                         <ScrollView>
-                        <StackLayout BackgroundColor="{StaticResource LightColor}">
+                            <StackLayout BackgroundColor="{Binding IsCurrent, Converter={StaticResource BoolToStyleConverter}}">
                             <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer
                                         Tapped="TapGestureRecognizer_OnTapped"
@@ -48,12 +48,20 @@
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <ViewCell>
-                                                <StackLayout Orientation="Horizontal" BackgroundColor="{StaticResource LightColor}" Padding="10,5">
-                                                    <Label Text="{Binding Order}" TextColor="{StaticResource OrangeColor}" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
-                                                    <Label Text="{Binding SubjectName}" LineBreakMode="WordWrap" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
-                                                    <Label Text="{Binding GroupOrTeacherName}" LineBreakMode="WordWrap" HorizontalOptions="CenterAndExpand"/>
-                                                    <Label Text="{Binding AuditoryName}" LineBreakMode="WordWrap" HorizontalOptions="EndAndExpand"/>
-                                                    </StackLayout>
+                                                    <StackLayout Orientation="Horizontal" BackgroundColor="{Binding IsCurrent, Converter={StaticResource BoolToStyleConverter}}" Padding="10,5">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="15*"/>
+                                                            <ColumnDefinition Width="35*"/>
+                                                            <ColumnDefinition Width="40*"/>
+                                                            <ColumnDefinition Width="10*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                        <Label Text="{Binding LessonTime}" LineBreakMode="WordWrap" TextColor="{StaticResource OrangeColor}" FontAttributes="Bold" HorizontalTextAlignment="Start"/>
+                                                        <Label Text="{Binding SubjectName}" Grid.Column="1" LineBreakMode="WordWrap" FontAttributes="Bold"  HorizontalTextAlignment="Start"/>
+                                                        <Label Text="{Binding GroupOrTeacherName}" Grid.Column="2" LineBreakMode="WordWrap" HorizontalTextAlignment="Start"/>
+                                                        <Label Text="{Binding AuditoryName}" Grid.Column="3" LineBreakMode="WordWrap" HorizontalTextAlignment="Start"/>
+                                                        </Grid>
+                                                </StackLayout>
                                             </ViewCell>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>

@@ -7,5 +7,6 @@ namespace MobileSchedule2.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public ObservableCollection<Lesson> Items { get; set; }
+        public bool IsCurrent { get; set; }
     }
 }

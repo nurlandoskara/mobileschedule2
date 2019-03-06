@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:services="clr-namespace:MobileSchedule2.Services;assembly=MobileSchedule2"
              x:Class="MobileSchedule2.App">
     <Application.Resources>
         <ResourceDictionary>
@@ -19,6 +20,7 @@
             <Color x:Key="BlueColor">#2980b9</Color>
             <Color x:Key="GreenColor">#16a085</Color>
             <Color x:Key="GreenColor2">#27ae60</Color>
+            <services:BoolToStyleConverter x:Key="BoolToStyleConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

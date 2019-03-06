@@ -14,7 +14,8 @@
         <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" VerticalTextAlignment="Center" Text="2019" TextColor="{StaticResource DarkColor}" FontSize="Small"/>
 
         <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" VerticalTextAlignment="Center" Text="Авторлары:" TextColor="{StaticResource DarkColor}" FontSize="Medium" FontAttributes="Bold"/>
-        <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" VerticalTextAlignment="Center" Text="Имя фамилия" TextColor="{StaticResource DarkColor}" FontSize="Medium"/>
+        <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" VerticalTextAlignment="Center" Text="Сәрсенбай Арайлым" TextColor="{StaticResource DarkColor}" FontSize="Medium"/>
+        <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" VerticalTextAlignment="Center" Text="Рубилова Айдана" TextColor="{StaticResource DarkColor}" FontSize="Medium"/>
 
     </StackLayout>
 </ContentPage>
