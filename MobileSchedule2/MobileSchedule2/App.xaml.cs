@@ -16,7 +16,7 @@ namespace MobileSchedule2
     {
         public static int GroupId { get; set; }
         public static int TeacherId { get; set; }
-        public static string BackendUrl = "http://sabakkestesi.azurewebsites.net/";
+        public static string BackendUrl = "http://sabak-kestesi.azurewebsites.net/";
         public static bool IsGroupChanged;
         public static bool IsTeacherChanged;
 
