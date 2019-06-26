@@ -1,6 +1,4 @@
-﻿using Android.Content;
-using Android.Preferences;
-using MobileSchedule2.Models;
+﻿using MobileSchedule2.Models;
 using MobileSchedule2.Views;
 using SQLite;
 using System;
@@ -8,6 +6,8 @@ using System.IO;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Android.Content;
+using Android.Preferences;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MobileSchedule2
